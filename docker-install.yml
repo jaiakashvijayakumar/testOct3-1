@@ -1,0 +1,18 @@
+
+---
+
+- name: Check docker and  isntall
+  hosts: all
+  vars:
+    app_download_url: https://wwwin-github.cisco.com/pa-test/sample-spring-boot-app
+
+    - name: Check docker version
+      command: docker -v
+      register: docker_result
+      ignore_errors: true
+
+    - name: Install docker
+      yum:
+        name:
+          - docker
+      when: docker_result is failed
